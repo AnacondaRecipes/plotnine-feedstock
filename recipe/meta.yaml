@@ -37,7 +37,7 @@ test:
     - pip
     - pytest
     - pytest-cov
-    - geopandas
+    - geopandas  # [py<311]
   imports:
     - plotnine
     - plotnine.coords
