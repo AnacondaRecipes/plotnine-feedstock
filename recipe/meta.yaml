@@ -12,8 +12,7 @@ source:
 
 build:
   number: 0
-  # geopandas isn't available on s390x
-  skip: True  # [py<37 or s390x]
+  skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -38,7 +37,8 @@ test:
     - pip
     - pytest
     - pytest-cov
-    - geopandas  # [py<310]
+    # geopandas isn't available on s390x
+    - geopandas  # [py<310 or s390x]
   imports:
     - plotnine
     - plotnine.coords
