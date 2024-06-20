@@ -66,7 +66,7 @@ test:
 
 about:
   home: https://github.com/has2k1/plotnine
-  license_file: {{ RECIPE_DIR }}/LICENSE
+  license_file: LICENSE
   license: MIT
   license_family: MIT
   summary: A grammar of graphics for python
