@@ -1,6 +1,6 @@
 {% set name = "plotnine" %}
-{% set version = "0.13.6" %}
-{% set sha256 = "3c8c8f958c295345140230ea29803488f83aba9b5a8d0b1b2eb3eaefbf0a06b8" %}
+{% set version = "0.14.5" %}
+{% set sha256 = "9e75969e8e10d8d770a4be36d10e075cc10b88ca6fcc99e36ada53436fb5653f" %}
 
 package:
   name: {{ name|lower }}
@@ -12,34 +12,35 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<39]
+  skip: True  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
     - python
     - pip
-    - setuptools
-    - setuptools_scm
+    - setuptools >=59
     - wheel
+    - setuptools-scm >=6.4
   run:
     - python
-    - matplotlib-base >=3.7.0
-    - pandas >=2.1.0,<3.0a0
-    - mizani >=0.11.0,<0.12.0
-    - numpy >=1.23.0
-    - scipy >=1.7.0
+    - matplotlib-base >=3.8.0
+    - pandas >=2.2.0
+    - mizani >=0.13.0,<0.14.dev0
+    - numpy >=1.23.5
+    - scipy >=1.8.0
     - statsmodels >=0.14.0
   run_constrained:
-    - scikit-misc >=0.3.0
+    - adjusttext >=1.2.0
+    - geopandas >=1.0.0
+    - scikit-learn >1.2.0
+    - scikit-misc >=0.5.1
 
 test:
   requires:
     - pip
     - pytest
     - pytest-cov
-    # geopandas isn't available on s390x
-    - geopandas  # [py<310 and not (linux and s390x)]
   imports:
     - plotnine
     - plotnine.coords
@@ -54,15 +55,10 @@ test:
     - plotnine.themes
   source_files:
     - tests
-    - "pyproject.toml"
+    - pyproject.toml
   commands:
-    # Disable pip check because of mizani 0.9.2 requires tzdata, which is not installed,
-    # see also https://github.com/AnacondaRecipes/mizani-feedstock/pull/3#issue-1812052144
     - pip check
-    # Disable pytest because a lot of tests has an error 'assert images not close',
-    # see the upstream issue https://github.com/has2k1/plotnine/issues/627
-    # conda-forge also disables pytest https://github.com/conda-forge/plotnine-feedstock/commit/5d559dbd9a09b83cd74a55ea11587cbff29eef64
-    #- pytest tests -vv
+    - pytest tests -vv
 
 about:
   home: https://github.com/has2k1/plotnine
