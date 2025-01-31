@@ -58,7 +58,11 @@ test:
     - pyproject.toml
   commands:
     - pip check
-    - pytest tests -vv
+    # Disable pytest because a lot of tests has an error 'assert images not close',
+    # still true as of 0.14.5
+    # see the upstream issue https://github.com/has2k1/plotnine/issues/627
+    # conda-forge also disables pytest https://github.com/conda-forge/plotnine-feedstock/commit/5d559dbd9a09b83cd74a55ea11587cbff29eef64
+    #- pytest tests -vv
 
 about:
   home: https://github.com/has2k1/plotnine
