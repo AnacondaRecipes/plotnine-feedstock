@@ -1,6 +1,5 @@
 {% set name = "plotnine" %}
-{% set version = "0.14.5" %}
-{% set sha256 = "9e75969e8e10d8d770a4be36d10e075cc10b88ca6fcc99e36ada53436fb5653f" %}
+{% set version = "0.15.0" %}
 
 package:
   name: {{ name|lower }}
@@ -8,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: 8dc491f5000062f6af7cf29429ee78b617daa8b2c22a1dd4e8b593f08bb51c20
 
 build:
   number: 0
-  skip: True  # [py<310]
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -26,43 +25,60 @@ requirements:
     - python
     - matplotlib-base >=3.8.0
     - pandas >=2.2.0
-    - mizani >=0.13.0,<0.14.0
+    - mizani >=0.14.0,<0.15
     - numpy >=1.23.5
     - scipy >=1.8.0
-    - statsmodels >=0.14.0
+    - statsmodels >=0.14.5
   run_constrained:
-    - adjusttext >=1.2.0
+    - adjustText >=1.2.0
     - geopandas >=1.0.0
-    - scikit-learn >1.2.0
+    - geodatasets >=2024.8.0
+    - scikit-learn >=1.3.0
     - scikit-misc >=0.5.1
+    - polars >=1.24.0
+    - pyarrow >=19.0.1
+    - pyright >=1.1.403
 
 test:
-  requires:
-    - pip
-    - pytest
-    - pytest-cov
   imports:
     - plotnine
-    - plotnine.coords
+    - plotnine._mpl.patches
+    - plotnine._mpl.utils
+    - plotnine._utils
+    - plotnine._utils.yippie
+    - plotnine.animation
+    - plotnine.composition
     - plotnine.data
+    - plotnine.doctools
+    - plotnine.exceptions
     - plotnine.facets
-    - plotnine.geoms
-    - plotnine.guides
-    - plotnine.mapping
-    - plotnine.positions
+    - plotnine.geoms.geom
+    - plotnine.ggplot
+    - plotnine.helpers
+    - plotnine.layer
+    - plotnine.mapping.aes
+    - plotnine.options
+    - plotnine.positions.position
     - plotnine.scales
-    - plotnine.stats
-    - plotnine.themes
-  source_files:
-    - tests
-    - pyproject.toml
+    - plotnine.scales.scale_alpha
+    - plotnine.scales.scale_linetype
+    - plotnine.scales.scale_shape
+    - plotnine.scales.scale_size
+    - plotnine.scales.scale_xy
+    - plotnine.scales.scales
+    - plotnine.stats.binning
+    - plotnine.stats.stat
+    - plotnine.stats.stat_ellipse
+    - plotnine.themes.theme
+  requires:
+    - pip
   commands:
     - pip check
-    # Disable pytest because a lot of tests has an error 'assert images not close',
-    # still true as of 0.14.5
-    # see the upstream issue https://github.com/has2k1/plotnine/issues/627
-    # conda-forge also disables pytest https://github.com/conda-forge/plotnine-feedstock/commit/5d559dbd9a09b83cd74a55ea11587cbff29eef64
-    #- pytest tests -vv
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # E assert images not close
+    # pstream issue https://github.com/has2k1/plotnine/issues/627
+    # https://github.com/conda-forge/plotnine-feedstock/blob/main/recipe/meta.yaml#L67
+    # - pytest -v tests
 
 about:
   home: https://github.com/has2k1/plotnine
