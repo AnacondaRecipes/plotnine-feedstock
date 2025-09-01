@@ -21,6 +21,7 @@ requirements:
     - setuptools >=59
     - wheel
     - setuptools-scm >=6.4
+    - tomli
   run:
     - python
     - matplotlib-base >=3.8.0
