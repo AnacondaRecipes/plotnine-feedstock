@@ -1,5 +1,5 @@
 {% set name = "plotnine" %}
-{% set version = "0.15.0" %}
+{% set version = "0.15.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8dc491f5000062f6af7cf29429ee78b617daa8b2c22a1dd4e8b593f08bb51c20
+  sha256: 2e8130db4673e0daccb1fd1dfc9f2a6cd2e7843b14f861f4ab861dde1639045f
 
 build:
   number: 0
@@ -29,7 +29,7 @@ requirements:
     - mizani >=0.14.0,<0.15
     - numpy >=1.23.5
     - scipy >=1.8.0
-    - statsmodels >=0.14.5
+    - statsmodels >=0.14.6
   run_constrained:
     - adjusttext >=1.2.0
     - geopandas >=1.0.0
@@ -38,7 +38,7 @@ requirements:
     - scikit-misc >=0.5.1
     - polars >=1.24.0
     - pyarrow >=19.0.1
-    - pyright >=1.1.403
+    - pyright >=1.1.404
 
 test:
   imports:
@@ -91,7 +91,7 @@ about:
     plotnine is an implementation of a grammar of graphics in Python based on ggplot2.
     The grammar allows you to compose plots by explicitly mapping variables in a dataframe to the visual objects that make up the plot.
   dev_url: https://github.com/has2k1/plotnine
-  doc_url: https://plotnine.readthedocs.io
+  doc_url: https://plotnine.org
 
 extra:
   recipe-maintainers:
