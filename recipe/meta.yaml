@@ -2,7 +2,7 @@
 {% set version = "0.15.7" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
@@ -19,9 +19,8 @@ requirements:
     - python
     - pip
     - setuptools >=59
-    - wheel
     - setuptools-scm >=6.4
-    - tomli
+    - wheel
   run:
     - python
     - matplotlib-base >=3.8.0
@@ -31,13 +30,15 @@ requirements:
     - scipy >=1.8.0
     - statsmodels >=0.14.6  # [not emscripten]
   run_constrained:
-    - adjustText >=1.2.0
+    # extra
+    - adjusttext >=1.2.0
     - geopandas >=1.0.0
     - geodatasets >=2024.8.0
     - scikit-learn >=1.3.0
     - scikit-misc >=0.5.1
     - polars >=1.24.0
     - pyarrow >=19.0.1
+    # typing
     - pyright ==1.1.404
 
 test:
